@@ -1,0 +1,416 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.parallax-container {
+    position: relative;
+    min-height: 200vh;
+    background: linear-gradient(
+        45deg, 
+        #FF6B6B, 
+        #4ECDC4, 
+        #FFD93D, 
+        #6C5CE7
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow: hidden;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.pattern-layer-1 {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    z-index: 2;
+    animation: patternMove 20s linear infinite;
+}
+
+.pattern-layer-2 {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+    z-index: 3;
+    animation: patternMove 15s linear infinite reverse;
+}
+
+@keyframes patternMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(100px, 100px);
+    }
+}
+
+.calculator-wrapper {
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    width: 400px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+    gap: 10px;
+    position: relative;
+    z-index: 6;
+}
+
+.display {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 25px;
+    text-align: right;
+    min-height: 120px;
+    grid-column: 1 / -1;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    word-wrap: break-word;
+    word-break: break-all;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1) inset;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.previous-operand {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.4rem;
+    min-height: 28px;
+    margin-bottom: 5px;
+}
+
+.current-operand {
+    color: white;
+    font-size: 2.8rem;
+    min-height: 50px;
+    transition: all 0.3s ease;
+}
+
+.current-operand.animate {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+button {
+    cursor: none;
+    font-size: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    color: #000;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 7;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.operator {
+    background: linear-gradient(145deg, rgba(255, 165, 0, 0.2), rgba(255, 140, 0, 0.3));
+}
+
+.clear {
+    background: linear-gradient(145deg, rgba(255, 0, 0, 0.2), rgba(220, 0, 0, 0.3));
+}
+
+.equals {
+    background: linear-gradient(145deg, rgba(0, 128, 0, 0.2), rgba(0, 150, 0, 0.3));
+}
+
+.delete {
+    background: rgba(255, 165, 0, 0.2);
+}
+
+.signature {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 10;
+    text-align: right;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.made-by {
+    display: block;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    transform: translateZ(20px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    display: block;
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    text-shadow: 
+        2px 2px 0px rgba(0, 0, 0, 0.1),
+        -1px -1px 0px rgba(255, 255, 255, 0.7);
+    transform: translateZ(40px);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.name::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #2193b0, #6dd5ed);
+    transition: width 0.3s ease;
+}
+
+.name:hover::before {
+    width: 100%;
+}
+
+.name:hover {
+    transform: translateZ(60px) rotateX(10deg) rotateY(-10deg) scale(1.1);
+    color: #2193b0;
+    animation: signatureGlow 2s infinite;
+}
+
+@keyframes signatureGlow {
+    0%, 100% {
+        text-shadow: 
+            2px 2px 0px rgba(0, 0, 0, 0.1),
+            -1px -1px 0px rgba(255, 255, 255, 0.7),
+            0 0 10px rgba(33, 147, 176, 0.5);
+    }
+    50% {
+        text-shadow: 
+            2px 2px 0px rgba(0, 0, 0, 0.1),
+            -1px -1px 0px rgba(255, 255, 255, 0.7),
+            0 0 20px rgba(33, 147, 176, 0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .signature {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .made-by {
+        font-size: 1rem;
+    }
+    
+    .name {
+        font-size: 2rem;
+    }
+}
+
+
+
+
+
+
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.2;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+.background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+    mix-blend-mode: screen;
+}
+
+
+.parallax-container::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%" height="100%" filter="url(%23noise)" opacity="0.1"/%3E%3C/svg%3E');
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.time-taken {
+    position: relative;
+    text-align: center;
+    font-size: 1.4rem;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 300;
+    letter-spacing: 2px;
+    z-index: 10;
+    padding: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+}
+
+.time-taken::before {
+    content: '⏱️'; 
+    font-size: 1.8rem;
+    margin-right: 10px;
+    animation: spin 2s infinite linear;
+    display: inline-block;
+}
+
+.time-taken .highlight {
+    font-weight: 800;
+    color: #2193b0;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 6px 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    animation: pulse 2s ease-in-out infinite;
+    display: inline-block;
+    margin: 0 5px;
+    border: 2px solid rgba(33, 147, 176, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.time-taken .highlight:hover {
+    transform: translateZ(20px) rotate(5deg);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(33, 147, 176, 0.3);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(33, 147, 176, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .time-taken {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+    }
+    
+    .time-taken::before {
+        font-size: 1.4rem;
+    }
+    
+    .time-taken .highlight {
+        padding: 4px 8px;
+    }
+}
+
+
+.calculator button {
+    position: relative;
+    overflow: hidden;
+}
+
+.calculator button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.calculator button:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.parallax-container {
+    height: 100vh;
+    overflow: hidden;
+}
+    
+    
+
+/* Unified Mentor Is Good! */
